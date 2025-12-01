@@ -20,7 +20,7 @@ const app = express()
 
 app.use(morgan("dev"))
 app.use(credentials)
-app.use(cors({origin: "http://localhost:3003"}))
+app.use(cors({origin: "http://localhost:5173"}))
 app.use(bodyParser.json())
 app.use(cookieParser())
 app.use(express.json())

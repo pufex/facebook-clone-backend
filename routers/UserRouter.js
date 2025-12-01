@@ -1,5 +1,5 @@
 import express from "express"
-import { setBackgroundPicture, setProfilePicture } from "../controllers/userControllers"
+import { setBackgroundPicture, setProfilePicture } from "../controllers/userControllers.js"
 
 const UserRouter = express.Router()
 

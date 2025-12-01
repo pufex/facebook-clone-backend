@@ -1,7 +1,7 @@
 import Comment from "../models/Comment.js"
 import Post from "../models/Post.js"
-import ImageDeclaration from "../models/ImageDeclaration"
-import ImageChunk from "../models/ImageChunk"
+import ImageDeclaration from "../models/ImageDeclaration.js"
+import ImageChunk from "../models/ImageChunk.js"
 import {commentSchema} from "../zod/commentSchemas.js"
 
 export const createComment = async (req, res) => {
