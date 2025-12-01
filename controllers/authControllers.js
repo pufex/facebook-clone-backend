@@ -101,3 +101,8 @@ export const refresh = (req, res) => {
         }
     )
 }
+
+export const logout = (req, res) => {
+    const token = req.cookies.facebook
+    res.clearCookie(token)
+}
