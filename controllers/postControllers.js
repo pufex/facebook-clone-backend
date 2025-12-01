@@ -68,3 +68,29 @@ export const deletePost = async (req, res) => {
         res.sendStatus(500)
     }
 }
+
+export const getPostsPage = async (req, res) => {
+    const page = Number(req.params.page)
+    try{
+        const posts = await Post.find()
+            .limit(10)
+            .skip(10 * (page-1))
+        res.json(posts)
+    }catch(err){
+        console.log(err)
+        res.sendStatus(500)
+    }
+}
+
+export const getPost = async (req, res) => {
+    const post_id = req.params.id
+    try{
+        const post = await Post.findById(post_id)
+        const user_id = post.user_id
+        const user = await User.findById(user_id)
+        res.json({...post, user})
+    }catch(err){
+        console.log(err)
+        res.sendStatus(500)
+    }
+}
