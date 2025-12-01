@@ -1,5 +1,5 @@
-import User from "../models/User";
-import ImageDeclaration from "../models/ImageDeclaration";
+import User from "../models/User.js";
+import ImageDeclaration from "../models/ImageDeclaration.js";
 
 export const setProfilePicture = async (req,res) => {
     const user_id = req.user._id
