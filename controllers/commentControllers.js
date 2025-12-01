@@ -85,3 +85,14 @@ export const deleteComment = async (req, res) => {
         res.sendStatus(500)
     }
 }
+
+export const getComments = async (req, res) => {
+    const post_id = req.params.id
+    try{
+        const comments = Comment.find({post_id})
+        res.json(comments)
+    }catch(err){
+        console.log(err)
+        res.sendStatus(500)
+    }
+}
