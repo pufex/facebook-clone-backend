@@ -10,6 +10,7 @@ import credentials from "./middleware/credentials.js"
 import AuthRouter from "./routers/AuthRouter.js"
 import PostRouter from "./routers/PostRouter.js"
 import CommentRouter from "./routers/CommentRouter.js"
+import ImageUploadRouter from "./routers/ImageUploadRouter.js"
 
 dotenv.config()
 
@@ -26,6 +27,7 @@ app.use(express.urlencoded({extended: true}))
 app.use("/auth", AuthRouter)
 app.use("/posts", PostRouter)
 app.use("/comments", CommentRouter)
+app.use("/images", ImageUploadRouter)
 
 mongoose.connect(process.env.MONGODB_URI)
     .then(() => {
