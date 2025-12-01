@@ -68,3 +68,36 @@ export const login = async (req, res) => {
         res.sendStatus(500)
     }
 }
+
+export const refresh = (req, res) => {
+    const token = req.cookies.facebook
+    jwt.verify(
+        token,
+        process.env.REFRESH_TOKEN_SECRET,
+        async (err, encoded) => {
+            if(err){
+                return res.sendStatus(401)
+            }
+
+            const {_id: user_id} = encoded
+            const user = await User.findById(user_id)
+            if(!user){
+                return res.sendStatus(401)
+            }
+
+            const payload = {
+                _id: user_id,
+                name: user.name,
+                surname: user.surname,
+                email: user.email,
+            }
+
+            const accessToken = jwt.sign(
+                payload,
+                process.env.ACCESS_TOKEN_SECRET,
+                {expiresIn: "1h"}
+            )
+            res.json({user, accessToken})
+        }
+    )
+}
