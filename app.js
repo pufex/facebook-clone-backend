@@ -1,6 +1,7 @@
 import express from "express"
 import mongoose from "mongoose"
 import dotenv from "dotenv"
+
 import bodyParser from "body-parser"
 import cookieParser from "cookie-parser"
 import cors from "cors"
@@ -8,6 +9,7 @@ import morgan from "morgan"
 import credentials from "./middleware/credentials.js"
 
 import AuthRouter from "./routers/AuthRouter.js"
+import UserRouter from "./routers/UserRouter.js"
 import PostRouter from "./routers/PostRouter.js"
 import CommentRouter from "./routers/CommentRouter.js"
 import ImageUploadRouter from "./routers/ImageUploadRouter.js"
@@ -25,6 +27,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
 app.use("/auth", AuthRouter)
+app.use("/users", UserRouter)
 app.use("/posts", PostRouter)
 app.use("/comments", CommentRouter)
 app.use("/images", ImageUploadRouter)
