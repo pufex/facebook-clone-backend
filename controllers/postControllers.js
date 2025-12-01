@@ -5,6 +5,7 @@ import ImageDeclaration from "../models/ImageDeclaration.js"
 import ImageChunk from "../models/ImageChunk.js"
 
 export const createPost = async (req, res) => {
+    const user_id = req.user._id
     const result = postSchema.safeParse(req.body)
     if(result.success === false){
         return res.sendStatus(400)
@@ -13,7 +14,7 @@ export const createPost = async (req, res) => {
     try{
         const post = new Post({
             ...result.data,
-            user_id: req.user._id
+            user_id
         })
         await post.save()
         const user = await User.findById(user_id)
