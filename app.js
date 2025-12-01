@@ -7,6 +7,8 @@ import cors from "cors"
 import morgan from "morgan"
 import credentials from "./middleware/credentials.js"
 
+import AuthRouter from "./routers/AuthRouter.js"
+
 dotenv.config()
 
 const app = express()
@@ -18,6 +20,8 @@ app.use(bodyParser.json())
 app.use(cookieParser())
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
+
+app.use("/auth", AuthRouter)
 
 mongoose.connect(process.env.MONGODB_URI)
     .then(() => {
