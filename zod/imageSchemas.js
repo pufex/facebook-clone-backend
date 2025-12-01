@@ -6,7 +6,6 @@ export const ImageDeclarationSchema = z.object({
 })
 
 export const ImageChunkSchema = z.object({
-    image_id: z.string(),
     chunkNumber: z.number().positive(),
     data: z.string().min(1)
 })
