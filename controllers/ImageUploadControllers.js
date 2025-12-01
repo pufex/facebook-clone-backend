@@ -51,3 +51,39 @@ export const UploadChunk = async (req, res) => {
     }
 
 }
+
+export const getDeclaration = async (req, res) => {
+    const declaration_id = req.params.id
+    try{
+        const declaration = await ImageDeclaration.findById(declaration_id)
+        if(!declaration){
+            return res.sendStatus(404)
+        }
+        res.json(declaration)
+    }catch(err){
+        console.log(err)
+        res.sendStatus(500)
+    }
+}
+
+export const getChunk = async (req, res) => {
+    const declaration_id = req.params.id
+    const {chunkNumber} = req.body
+    try{
+        const declaration = await ImageDeclaration.findById(declaration_id)
+        if(!declaration){
+            return res.sendStatus(404)
+        }
+        const chunk = await ImageChunk.findOne({
+            image_id: declaration_id,
+            chunkNumber
+        })
+        if(!chunk){
+            return res.sendStatus(404)
+        }
+        res.json(chunk)
+    }catch(err){
+        console.log(err)
+        res.sendStatus(500)
+    }
+}
