@@ -34,6 +34,9 @@ export const editPost = async (req, res) => {
     const user_id = req.user._id
     try{
         const post = await Post.findById(post_id)
+        if(!post){
+            return res.sendStatus(404)
+        }
         // Check if its user's post.
         if(post.user_id !== user_id){
             return res.sendStatus(403)
@@ -56,8 +59,16 @@ export const editPost = async (req, res) => {
 
 export const deletePost = async (req, res) => {
     const post_id = req.params.id
+    const user_id = req.user._id
     try{
-        const post = await Post.findByIdAndDelete(post_id)
+        const post = await Post.findById(post_id)
+        if(!post){
+            return res.sendStatus(404)
+        }
+        if(post.user_id !== user_id){
+            return res.sendStatus(403)
+        }
+        await Post.findByIdAndDelete(post_id)
         await Promise.all(post.pictures_ids.map(async (picture_id) => {
             await ImageDeclaration.findByIdAndDelete(picture_id)
             await ImageChunk.deleteMany({image_id: picture_id})
