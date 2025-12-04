@@ -4,7 +4,7 @@ import ImageDeclaration from "../models/ImageDeclaration.js";
 export const getUser = async (req, res) => {
     const user_id = req.params.id
     try{
-        const user = await User.findById()
+        const user = await User.findById(user_id)
         res.json(user)
     }catch(err){
         console.log(err)
