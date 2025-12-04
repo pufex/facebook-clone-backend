@@ -1,6 +1,17 @@
 import User from "../models/User.js";
 import ImageDeclaration from "../models/ImageDeclaration.js";
 
+export const getUser = async (req, res) => {
+    const user_id = req.params.id
+    try{
+        const user = await User.findById(user_id)
+        res.json(user)
+    }catch(err){
+        console.log(err)
+        res.sendStatus(500)
+    }
+}
+
 export const setProfilePicture = async (req,res) => {
     const user_id = req.user._id
     const declaration_id = req.params.id

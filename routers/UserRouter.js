@@ -1,8 +1,13 @@
 import express from "express"
-import { setBackgroundPicture, setProfilePicture } from "../controllers/userControllers.js"
+import { 
+    getUser,
+    setBackgroundPicture, 
+    setProfilePicture 
+} from "../controllers/userControllers.js"
 
 const UserRouter = express.Router()
 
+UserRouter.get("/:id", getUser)
 UserRouter.patch("/profile-picture/:id", setProfilePicture)
 UserRouter.patch("/background-picture/:id", setBackgroundPicture)
 

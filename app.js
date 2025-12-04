@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser"
 import cors from "cors"
 import morgan from "morgan"
 import credentials from "./middleware/credentials.js"
+import verifyJWT from "./middleware/verifyJWT.js"
 
 import AuthRouter from "./routers/AuthRouter.js"
 import UserRouter from "./routers/UserRouter.js"
@@ -27,7 +28,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
 app.use("/auth", AuthRouter)
-app.use("/users", UserRouter)
+app.use("/users", verifyJWT, UserRouter)
 app.use("/posts", PostRouter)
 app.use("/comments", CommentRouter)
 app.use("/images", ImageUploadRouter)
